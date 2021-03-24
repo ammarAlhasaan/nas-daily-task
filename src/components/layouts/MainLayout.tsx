@@ -1,9 +1,10 @@
 import React, {FunctionComponent, useState} from 'react';
-import {Router, Link, Switch, Route, useParams, useHistory} from "react-router-dom";
+import {Router, Link, Switch, Route, useParams} from "react-router-dom";
 import {history} from "../../helpers/history";
 import logo from './../../assets/images/logo.svg';
-import BaseCard from "../cards/BaseCard";
+import logoBlack from './../../assets/images/logo-black.svg';
 import BaseButton from "../buttons/BaseButton";
+import StoriesList from "../../pages/stories/StoriesList";
 
 type MainLayoutProps = {
     id?: string,
@@ -13,10 +14,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({id, children}) => {
     return (
         <Router history={history}>
             <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
-                <nav style={{
-                    background: '#FFFFFF',
-                    boxShadow: '0px 3px 28px rgba(0, 0, 0, 0.08)'
-                }} className="uk-navbar-container" uk-navbar="true">
+                <nav className="uk-navbar-container WhiteNavBar" uk-navbar="true">
                     <div className="uk-navbar-center">
                         <ul className="uk-navbar-nav">
                             <li>
@@ -42,7 +40,12 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({id, children}) => {
                 </div>
                 <Routes/>
             </div>
+            <footer>
+                <div className="uk-flex uk-flex-middle uk-flex-center Footer">
+                    <img src={logoBlack}/>
+                </div>
 
+            </footer>
         </Router>)
 }
 
@@ -51,27 +54,10 @@ function Routes() {
         <div>
             <Switch>
                 <Route path="/:type/:id" children={<ArticleItem/>}/>
-                <Route path="/:type" children={<ArticlesList/>}/>
+                <Route path="/:type" children={<StoriesList/>}/>
             </Switch>
         </div>
     )
-}
-
-function ArticlesList() {
-    let params: any = useParams();
-    let {type} = params
-    const cards = [1, 2, 3, 4, 5, 6].map((item, index) => {
-        return <BaseCard key={index}/>
-    })
-
-    return (
-        <div>
-            <h3>All articles for: {type}</h3>
-            <div uk-grid="true" style={{margin: 0}}>
-                {cards}
-            </div>
-        </div>
-    );
 }
 
 function ArticleItem() {

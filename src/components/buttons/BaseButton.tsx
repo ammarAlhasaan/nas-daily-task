@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 
-type BaseButtonProps = {
+export type BaseButtonProps = {
     id?: string,
     title: string,
     onClick: any,
