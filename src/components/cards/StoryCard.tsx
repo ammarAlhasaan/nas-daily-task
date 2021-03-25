@@ -14,10 +14,9 @@ const StoryCard: FunctionComponent<StoryCardProps> = ({id, getStory, stories = [
     useEffect(() => {
         getStory(id)
     }, [])
-    console.log(stories)
 
     const story: any = stories?.length > 0 ? stories.find((story: any) => {
-        return story.id == id
+        return (story?.id) ? story.id == id : null
     }) : null
     if (!story) {
         return null
