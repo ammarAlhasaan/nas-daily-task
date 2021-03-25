@@ -1,16 +1,13 @@
 import React, {FunctionComponent} from 'react';
+import CommentsReplysList from "../../components/comments/CommentsReplysList";
 
 type StoriesItemProps = {
     id?: string,
-    title: string,
-    onClick: any,
-    active?: boolean
-}
-const StoriesItem: FunctionComponent<StoriesItemProps> = ({id, title, onClick, active, children}) => {
 
-    return (<button
-        className={active ? "StoriesItem StoriesItemActive" : "StoriesItem"}
-        onClick={onClick}>{title}</button>)
+}
+const StoriesItem: FunctionComponent<StoriesItemProps> = ({id, children}) => {
+
+    return (<CommentsReplysList/>)
 }
 
 export default StoriesItem

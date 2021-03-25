@@ -5,6 +5,7 @@ import logo from './../../assets/images/logo.svg';
 import logoBlack from './../../assets/images/logo-black.svg';
 import StoriesList from "../../pages/stories/StoriesList";
 import StoryTypeGroupButtons from "../buttons/StoryTypeGroupButtons";
+import StoriesItem from "../../pages/stories/StoriesItem";
 
 type MainLayoutProps = {
     id?: string,
@@ -44,9 +45,9 @@ function Routes() {
     return (
         <div>
             <Switch>
-                <Route path="/:type/:id" children={<ArticleItem/>}/>
+                <Route path="/:type/:id" children={<StoriesItem/>}/>
                 <Route path="/:type" children={<StoriesList/>}/>
-                <Redirect exact from="/" to="/new" />
+                <Redirect exact from="/" to="/new"/>
 
             </Switch>
         </div>
