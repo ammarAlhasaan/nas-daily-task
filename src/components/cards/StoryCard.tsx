@@ -3,6 +3,7 @@ import BaseCard, {BaseCardProps} from "./BaseCard";
 import {connect} from "react-redux";
 import {getStory} from "../../redux/Stories/stories.actions";
 import moment from 'moment';
+import StoryCardLoader from "./StoryCardLoader";
 
 type StoryCardProps = {
     id: string,
@@ -19,7 +20,7 @@ const StoryCard: FunctionComponent<StoryCardProps> = ({id, getStory, stories = [
         return (story?.id) ? story.id == id : null
     }) : null
     if (!story) {
-        return null
+        return <StoryCardLoader/>
     }
     const timeFromNow = moment(moment(story.time * 1000).format()).fromNow()
     return (<BaseCard title={story.title} description={<span><b>By: </b>{story.by}</span>} onClick={() => {
