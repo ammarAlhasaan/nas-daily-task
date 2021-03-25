@@ -23,9 +23,10 @@ const StoryCard: FunctionComponent<StoryCardProps> = ({id, getStory, stories = [
         return <StoryCardLoader/>
     }
     const timeFromNow = moment(moment(story.time * 1000).format()).fromNow()
+    const commentLength = story?.kids?.length
     return (<BaseCard title={story.title} description={<span><b>By: </b>{story.by}</span>} onClick={() => {
         alert('wds')
-    }} details={`${timeFromNow} min ago | ${story?.kids?.length} comments`}/>)
+    }} details={`${timeFromNow} ${(commentLength) ? "| " + commentLength + " comments" : ""}`}/>)
 }
 const mapStateToProps = (state: any) => {
     return {...state.stories}

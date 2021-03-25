@@ -75,12 +75,16 @@ button {
 
 .BaseCard .Content {
     font-size: 12px;
-    margin: 0 0 5px 0;
+    margin: 0 0 15px 0;
 }
 
 .BaseCard .Details {
     font-size: 10px;
     color: rgba(0, 0, 0, 0.5);
+}
+
+.BaseCard .Details .ClockIcon {
+    margin-right: 5px;
 }
 
 .Footer {

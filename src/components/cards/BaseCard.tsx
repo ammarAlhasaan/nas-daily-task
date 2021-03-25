@@ -12,7 +12,9 @@ const BaseCard: FunctionComponent<BaseCardProps> = ({id, title, description, det
     return (<div className="BaseCard">
         <h5 className="Title">{title}</h5>
         {description && <p className="Content">{description}</p>}
-        {details && <span className="Details">{details}</span>}
+        {details &&
+        <span className="Details uk-flex uk-flex-middle">
+          <span className="ClockIcon" uk-icon="icon: clock; ratio: .5"></span>{details}</span>}
     </div>)
 }
 
