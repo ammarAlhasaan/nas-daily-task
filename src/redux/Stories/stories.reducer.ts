@@ -1,10 +1,21 @@
-import {GET_NEW_STORIES, GET_TOP_STORIES, SELECT_STORY, SELECT_TYPE, GET_STORY, CLEAR_STORIES} from "./stories.types";
+import {
+    GET_NEW_STORIES,
+    GET_TOP_STORIES,
+    SELECT_STORY,
+    SELECT_TYPE,
+    GET_STORY,
+    CLEAR_STORIES,
+    LOAD_MORE
+} from "./stories.types";
 
+const PAGE_SIZE = 10
 const INITIAL_STATE = {
     stories: [],
     storiesIds: [],
+    currentStoriesIds: [],
     selectedStory: {},
-    selectedType: ''
+    selectedType: '',
+    pageSize: 0,
 };
 const reducer = (state = INITIAL_STATE, action: any) => {
     switch (action.type) {
@@ -29,6 +40,16 @@ const reducer = (state = INITIAL_STATE, action: any) => {
         case SELECT_TYPE:
             return {
                 ...state, selectedType: action.payload,
+            };
+        case LOAD_MORE:
+            let pageSize = state.pageSize + PAGE_SIZE
+            pageSize = pageSize > state.storiesIds.length ? state.storiesIds.length : pageSize
+            const addFrom = state.currentStoriesIds.length
+            const addTo = pageSize
+            return {
+                ...state,
+                pageSize,
+                currentStoriesIds: [...state.currentStoriesIds, ...state.storiesIds.slice(addFrom, addTo)],
             };
         default:
             return state;

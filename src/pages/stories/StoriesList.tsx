@@ -3,19 +3,22 @@ import {useParams} from "react-router-dom";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import StoryCard from "../../components/cards/StoryCard";
 import {connect} from "react-redux";
-import {getNewStories, getTopStories} from "../../redux/Stories/stories.actions";
+import {getNewStories, getTopStories, loadMore} from "../../redux/Stories/stories.actions";
 
 type StoriesListProps = {
     id?: string,
     stories?: any,
     storiesIds?: any,
+    currentStoriesIds?: any,
     selectedType?: string,
-    getNewStories?: any, getTopStories?: any
+    getNewStories?: any,
+    getTopStories?: any,
+    loadMore?: any,
 }
-const StoriesList: FunctionComponent<StoriesListProps> = ({id, selectedType, storiesIds, getNewStories, getTopStories}) => {
+const StoriesList: FunctionComponent<StoriesListProps> = ({id, selectedType, storiesIds, loadMore, currentStoriesIds, getNewStories, getTopStories}) => {
     let params: any = useParams();
     let {type} = params
-    console.log(selectedType)
+    // console.log(selectedType)
     useEffect(() => {
         if (selectedType === 'past') {
             getTopStories()
@@ -23,11 +26,12 @@ const StoriesList: FunctionComponent<StoriesListProps> = ({id, selectedType, sto
             getNewStories()
         }
     }, [selectedType])
+    useEffect(() => {
+        loadMore()
+    }, [storiesIds])
     let cards = []
-
     // @ts-ignore
-    cards = storiesIds?.length > 0 ? storiesIds?.map((item, index) => {
-        if (index > 10) return null
+    cards = currentStoriesIds?.length > 0 ? currentStoriesIds?.map((item, index) => {
         return <StoryCard key={index} id={item}/>
     }) : null
 
@@ -39,7 +43,7 @@ const StoriesList: FunctionComponent<StoriesListProps> = ({id, selectedType, sto
             </div>
             <div className="LoadMoreContainer">
                 <PrimaryButton active={type === 'past'} title="Load More" onClick={() => {
-                    alert('ammar')
+                    loadMore()
                 }}/>
             </div>
         </div>)
@@ -51,5 +55,5 @@ StoriesList.defaultProps = {
 const mapStateToProps = (state: any) => {
     return {...state.stories}
 }
-export default connect(mapStateToProps, {getNewStories, getTopStories})(StoriesList)
+export default connect(mapStateToProps, {getNewStories, getTopStories, loadMore})(StoriesList)
 

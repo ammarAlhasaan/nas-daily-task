@@ -3,6 +3,7 @@ import BaseCard, {BaseCardProps} from "./BaseCard";
 import {connect} from "react-redux";
 import {getStory} from "../../redux/Stories/stories.actions";
 import moment from 'moment';
+import StoryCardLoader from "./StoryCardLoader";
 
 type StoryCardProps = {
     id: string,
@@ -14,18 +15,18 @@ const StoryCard: FunctionComponent<StoryCardProps> = ({id, getStory, stories = [
     useEffect(() => {
         getStory(id)
     }, [])
-    console.log(stories)
 
     const story: any = stories?.length > 0 ? stories.find((story: any) => {
-        return story.id == id
+        return (story?.id) ? story.id == id : null
     }) : null
     if (!story) {
-        return null
+        return <StoryCardLoader/>
     }
     const timeFromNow = moment(moment(story.time * 1000).format()).fromNow()
+    const commentLength = story?.kids?.length
     return (<BaseCard title={story.title} description={<span><b>By: </b>{story.by}</span>} onClick={() => {
         alert('wds')
-    }} details={`${timeFromNow} min ago | ${story?.kids?.length} comments`}/>)
+    }} details={`${timeFromNow} ${(commentLength) ? "| " + commentLength + " comments" : ""}`}/>)
 }
 const mapStateToProps = (state: any) => {
     return {...state.stories}
