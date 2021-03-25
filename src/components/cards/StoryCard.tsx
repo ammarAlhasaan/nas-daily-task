@@ -5,6 +5,7 @@ import {getStory} from "../../redux/Stories/stories.actions";
 import moment from 'moment';
 import StoryCardLoader from "./StoryCardLoader";
 import {history} from "../../helpers/history";
+import {useParams} from "react-router-dom";
 
 type StoryCardProps = {
     id: string,
@@ -14,6 +15,8 @@ type StoryCardProps = {
 }
 
 const StoryCard: FunctionComponent<StoryCardProps> = ({id, getStory, stories = [], selectedType, children}) => {
+    let params: any = useParams();
+    let {type} = params
     useEffect(() => {
         getStory(id)
     }, [])
@@ -31,7 +34,7 @@ const StoryCard: FunctionComponent<StoryCardProps> = ({id, getStory, stories = [
         description={<span><b>By: </b>{story.by}</span>}
         onClick={() => {
             console.log(`${story.id}`)
-            history.push(`/${selectedType}/${story.id}`)
+            history.push(`/${type}/${story.id}`)
         }}
         details={`${timeFromNow} ${(commentLength) ? "| " + commentLength + " comments" : ""}`}/>)
 }

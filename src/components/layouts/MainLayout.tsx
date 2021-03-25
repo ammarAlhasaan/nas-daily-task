@@ -5,7 +5,8 @@ import logo from './../../assets/images/logo.svg';
 import logoBlack from './../../assets/images/logo-black.svg';
 import StoriesList from "../../pages/stories/StoriesList";
 import StoryTypeGroupButtons from "../buttons/StoryTypeGroupButtons";
-import StoriesItem from "../../pages/stories/StoriesItem";
+import StoriesItem from "../../pages/stories/StoryItem";
+import StoryItem from "../../pages/stories/StoryItem";
 
 type MainLayoutProps = {
     id?: string,
@@ -45,23 +46,13 @@ function Routes() {
     return (
         <div>
             <Switch>
-                <Route path="/:type/:id" children={<StoriesItem/>}/>
+                <Route path="/:type/:id" children={<StoryItem />}/>
                 <Route path="/:type" children={<StoriesList/>}/>
                 <Redirect exact from="/" to="/new"/>
 
             </Switch>
         </div>
     )
-}
-
-function ArticleItem() {
-    let params: any = useParams();
-    let {type, id} = params
-    return (
-        <div>
-            <h3>the type for this article is {type} and the id is : {id}</h3>
-        </div>
-    );
 }
 
 

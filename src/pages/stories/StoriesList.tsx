@@ -18,7 +18,6 @@ type StoriesListProps = {
 const StoriesList: FunctionComponent<StoriesListProps> = ({id, selectedType, storiesIds, loadMore, currentStoriesIds, getNewStories, getTopStories}) => {
     let params: any = useParams();
     let {type} = params
-    // console.log(selectedType)
     useEffect(() => {
         if (selectedType === 'past') {
             getTopStories()
