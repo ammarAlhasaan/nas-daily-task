@@ -1,9 +1,8 @@
 import React, {FunctionComponent, useState} from 'react';
-import {Router, Link, Switch, Route, useParams} from "react-router-dom";
+import {Router, Link, Switch, Route, useParams, Redirect} from "react-router-dom";
 import {history} from "../../helpers/history";
 import logo from './../../assets/images/logo.svg';
 import logoBlack from './../../assets/images/logo-black.svg';
-import BaseButton from "../buttons/BaseButton";
 import StoriesList from "../../pages/stories/StoriesList";
 import StoryTypeGroupButtons from "../buttons/StoryTypeGroupButtons";
 
@@ -47,6 +46,8 @@ function Routes() {
             <Switch>
                 <Route path="/:type/:id" children={<ArticleItem/>}/>
                 <Route path="/:type" children={<StoriesList/>}/>
+                <Redirect exact from="/" to="/new" />
+
             </Switch>
         </div>
     )
