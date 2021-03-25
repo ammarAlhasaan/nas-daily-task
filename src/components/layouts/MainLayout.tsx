@@ -5,6 +5,7 @@ import logo from './../../assets/images/logo.svg';
 import logoBlack from './../../assets/images/logo-black.svg';
 import BaseButton from "../buttons/BaseButton";
 import StoriesList from "../../pages/stories/StoriesList";
+import StoryTypeGroupButtons from "../buttons/StoryTypeGroupButtons";
 
 type MainLayoutProps = {
     id?: string,
@@ -28,16 +29,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({id, children}) => {
                 </nav>
             </div>
             <div className="uk-container uk-container-small">
-                <div className="ButtonGroup">
-                    <BaseButton active={type === 'new'} title="New" onClick={() => {
-                        setType('new')
-                        history.push('/new')
-                    }}/>
-                    <BaseButton active={type === 'past'} title="Past" onClick={() => {
-                        setType('past')
-                        history.push('/past')
-                    }}/>
-                </div>
+                <StoryTypeGroupButtons/>
                 <Routes/>
             </div>
             <footer>

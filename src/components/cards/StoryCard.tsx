@@ -1,0 +1,33 @@
+import React, {FunctionComponent, useEffect} from 'react';
+import BaseCard, {BaseCardProps} from "./BaseCard";
+import {connect} from "react-redux";
+import {getStory} from "../../redux/Stories/stories.actions";
+import moment from 'moment';
+
+type StoryCardProps = {
+    id: string,
+    getStory?: any,
+    stories?: []
+}
+
+const StoryCard: FunctionComponent<StoryCardProps> = ({id, getStory, stories = [], children}) => {
+    useEffect(() => {
+        getStory(id)
+    }, [])
+    console.log(stories)
+
+    const story: any = stories?.length > 0 ? stories.find((story: any) => {
+        return story.id == id
+    }) : null
+    if (!story) {
+        return null
+    }
+    const timeFromNow = moment(moment(story.time * 1000).format()).fromNow()
+    return (<BaseCard title={story.title} description={<span><b>By: </b>{story.by}</span>} onClick={() => {
+        alert('wds')
+    }} details={`${timeFromNow} min ago | ${story?.kids?.length} comments`}/>)
+}
+const mapStateToProps = (state: any) => {
+    return {...state.stories}
+}
+export default connect(mapStateToProps, {getStory})(StoryCard)
