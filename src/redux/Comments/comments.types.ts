@@ -1,0 +1,4 @@
+export const GET_COMMENT = 'GET_COMMENT';
+export const CLEAR_COMMENTS = 'CLEAR_COMMENTS';
+export const GET_COMMENTS = 'GET_NEW_COMMENTS';
+export const SELECT_COMMENT = 'SELECT_COMMENT';

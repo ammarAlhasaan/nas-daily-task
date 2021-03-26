@@ -91,3 +91,26 @@ button {
     height: 100px;
     background: #FBC91B;
 }
+
+
+/****************************************/
+.uk-comment {
+    width: inherit !important;
+}
+
+.uk-comment-list .uk-comment ~ ul, .uk-comment-list .uk-comment ~ ul > :nth-child(n+2), .uk-comment-list > :nth-child(n+2) {
+    margin: 16px 0 0 0 !important;
+}
+
+.uk-comment-list > :nth-child(n+1) {
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+    padding-left: 15px;
+}
+
+.BaseCard .uk-comment-body p {
+    margin: 0;
+}
+
+.uk-comment-body > :last-child, .uk-comment-header > :last-child {
+    font-size: 12px !important;
+}

@@ -4,28 +4,26 @@ import PrimaryButton from "../../components/buttons/PrimaryButton";
 import StoryCard from "../../components/cards/StoryCard";
 import {connect} from "react-redux";
 import {getNewStories, getTopStories, loadMore} from "../../redux/Stories/stories.actions";
+import StoryTypeGroupButtons from "../../components/buttons/StoryTypeGroupButtons";
 
 type StoriesListProps = {
-    id?: string,
     stories?: any,
     storiesIds?: any,
     currentStoriesIds?: any,
-    selectedType?: string,
     getNewStories?: any,
     getTopStories?: any,
     loadMore?: any,
 }
-const StoriesList: FunctionComponent<StoriesListProps> = ({id, selectedType, storiesIds, loadMore, currentStoriesIds, getNewStories, getTopStories}) => {
+const StoriesList: FunctionComponent<StoriesListProps> = ({storiesIds, loadMore, currentStoriesIds, getNewStories, getTopStories}) => {
     let params: any = useParams();
     let {type} = params
-    // console.log(selectedType)
     useEffect(() => {
-        if (selectedType === 'past') {
+        if (type === 'past') {
             getTopStories()
         } else {
             getNewStories()
         }
-    }, [selectedType])
+    }, [type])
     useEffect(() => {
         loadMore()
     }, [storiesIds])
@@ -38,6 +36,8 @@ const StoriesList: FunctionComponent<StoriesListProps> = ({id, selectedType, sto
 
     return (
         <div>
+            <StoryTypeGroupButtons/>
+
             <div uk-grid="true" style={{margin: 0}}>
                 {cards}
             </div>
