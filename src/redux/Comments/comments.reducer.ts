@@ -2,7 +2,6 @@ import {
     GET_COMMENTS,
     SELECT_COMMENT,
     GET_COMMENT,
-    CLEAR_COMMENTS,
 } from "./comments.types";
 
 const INITIAL_STATE = {
@@ -21,8 +20,6 @@ const reducer = (state = INITIAL_STATE, action: any) => {
             return {
                 ...state, comments: [...state.comments, action.payload],
             };
-        case CLEAR_COMMENTS:
-            return {...INITIAL_STATE};
         case SELECT_COMMENT:
             return {
                 ...state, selectedComment: action.payload,

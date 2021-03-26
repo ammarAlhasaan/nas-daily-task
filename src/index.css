@@ -21,6 +21,10 @@ button {
     box-shadow: 0 3px 28px rgba(0, 0, 0, 0.08) !important;
 }
 
+.MainContainer {
+    min-height: calc(100vh - 180px);
+}
+
 /**************************************************/
 .ButtonGroup {
     margin: 20px 0 14px 0;

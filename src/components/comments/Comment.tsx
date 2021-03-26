@@ -15,8 +15,10 @@ type CommentProps = {
 }
 
 const Comment: FunctionComponent<CommentProps> = ({id, getComment, comments, index}) => {
+    // toggle show hide replies
     const [showReplies, setShowReplies] = useState(false)
 
+    // get comment from reducer
     const findComment = (id: any) => {
         return comments?.length > 0 ? comments.find((comment: any) => {
             return (comment?.id) ? comment.id == id : null
@@ -24,14 +26,13 @@ const Comment: FunctionComponent<CommentProps> = ({id, getComment, comments, ind
     }
 
     useEffect(() => {
+        // before get comment from api make sure we dont have it in the reducer
         if (!findComment(id))
             getComment(id)
     }, [id])
-    const comment: any = comments?.length > 0 ? comments.find((comment: any) => {
-        return (comment?.id) ? comment.id == id : null
-    }) : null
 
-
+    const comment: any = findComment(id)
+    // if not found comment yet show loader
     if (!comment) {
         return <StoryCardLoader/>
     }

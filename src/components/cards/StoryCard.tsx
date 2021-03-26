@@ -21,6 +21,7 @@ const StoryCard: FunctionComponent<StoryCardProps> = ({id, getStory, stories = [
     let params: any = useParams();
     let {type} = params
     useEffect(() => {
+        // get story and save it in reducer in stories array
         getStory(id)
     }, [id])
 
@@ -35,9 +36,11 @@ const StoryCard: FunctionComponent<StoryCardProps> = ({id, getStory, stories = [
         }
     }, [story])
 
+    // show loader if not found the story yet
     if (!story) {
         return <StoryCardLoader/>
     }
+    // format time
     const timeFromNow = moment(moment(story.time * 1000).format()).fromNow()
     const commentLength = story?.kids?.length
     return (

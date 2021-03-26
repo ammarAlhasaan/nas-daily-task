@@ -9,19 +9,24 @@ import {
 } from './stories.types';
 import hackerNewsApi from "../../apis/hacker-news.api";
 
-
-export const selectType = (type: string) => {
+/** save current story type (new, top) in reducer when we click on it**/
+export const selectType = (type: 'new' | 'top') => {
     return {type: SELECT_TYPE, payload: type};
 }
+
+/** save the story in reducer when we click on it**/
 export const selectStory = (story: any) => {
     return {type: SELECT_STORY, payload: story};
 }
 export const clearStories = () => {
     return {type: CLEAR_STORIES};
 }
+/** Load more 10 stories **/
 export const loadMore = () => {
     return {type: LOAD_MORE};
 }
+
+/** get story by id  **/
 export const getStory = (id: string) => async (dispatch: any) => {
     const response = await hackerNewsApi.get(`/item/${id}.json`);
     dispatch({type: GET_STORY, payload: response.data});

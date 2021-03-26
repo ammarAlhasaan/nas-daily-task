@@ -14,6 +14,7 @@ type CommentsListProps = {
 const CommentsList: FunctionComponent<CommentsListProps> = ({type, kids}) => {
     useEffect(() => {
         if (kids?.length > 0) {
+            // save all comments id's in reducer in commentsIds array
             getComments(kids)
         }
     }, [kids])

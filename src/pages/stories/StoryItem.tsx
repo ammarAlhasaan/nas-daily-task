@@ -14,11 +14,13 @@ type StoryItemProps = {
     commentsIds?: any,
 }
 const StoryItem: FunctionComponent<StoryItemProps> = ({selectedStory, comments, commentsIds, getComments}) => {
-
+    // current page size 10, 20, 30...
     const [pageSize, setPageSize] = useState(0)
+    // get current comment to render it
     const [currentCommentsIds, setCurrentCommentsIds] = useState([])
     let params: any = useParams();
     let {id} = params
+    // slice the all comments id array
     const loadMoreComments = (allCommentsIds: []) => {
         let tempPageSize = pageSize + PAGE_SIZE
         tempPageSize = tempPageSize > allCommentsIds.length ? allCommentsIds.length : tempPageSize
@@ -36,12 +38,12 @@ const StoryItem: FunctionComponent<StoryItemProps> = ({selectedStory, comments, 
     }, [selectedStory])
     return (
         <div>
-            <h3 style={{marginTop: '20'}}>Details</h3>
+            <h3 style={{marginTop: 20}}>Details</h3>
 
             <div uk-grid="true" style={{margin: 0}}>
                 <StoryCard id={id} storyDetails={true}/>
             </div>
-            <h3>Comments</h3>
+            {selectedStory?.kids?.length > 0 && <h3>Comments</h3>}
             <CommentsList kids={currentCommentsIds}/>
             {currentCommentsIds?.length < selectedStory?.kids?.length && <div className="LoadMoreContainer">
               <PrimaryButton title="Load More" onClick={() => {

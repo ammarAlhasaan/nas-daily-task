@@ -18,15 +18,19 @@ const StoriesList: FunctionComponent<StoriesListProps> = ({storiesIds, loadMore,
     let params: any = useParams();
     let {type} = params
     useEffect(() => {
-        if (type === 'past') {
+        // get data by selected type
+        if (type === 'top') {
             getTopStories()
         } else {
             getNewStories()
         }
     }, [type])
     useEffect(() => {
+        // load 10 stories first time
         loadMore()
     }, [storiesIds])
+
+    // render the available ids in currentStoriesIds
     let cards = []
     // @ts-ignore
     cards = currentStoriesIds?.length > 0 ? currentStoriesIds?.map((item, index) => {
@@ -36,16 +40,20 @@ const StoriesList: FunctionComponent<StoriesListProps> = ({storiesIds, loadMore,
 
     return (
         <div>
+            {/*new top buttons*/}
             <StoryTypeGroupButtons/>
-
             <div uk-grid="true" style={{margin: 0}}>
                 {cards}
             </div>
+            {/*hide load more when no more stories */}
+            {currentStoriesIds?.length < storiesIds?.length &&
             <div className="LoadMoreContainer">
-                <PrimaryButton active={type === 'past'} title="Load More" onClick={() => {
-                    loadMore()
-                }}/>
+              <PrimaryButton active={type === 'top'} title="Load More" onClick={() => {
+                  loadMore()
+              }}/>
             </div>
+            }
+
         </div>)
 }
 StoriesList.defaultProps = {

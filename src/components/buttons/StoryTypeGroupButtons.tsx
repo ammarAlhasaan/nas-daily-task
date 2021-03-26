@@ -7,7 +7,7 @@ import {useParams} from "react-router-dom";
 
 const types = [
     {value: 'new', label: 'New', path: '/new'},
-    {value: 'past', label: 'Past', path: '/past'},
+    {value: 'top', label: 'Top', path: '/top'},
 ];
 const StoryTypeGroupButtons: FunctionComponent<any> = ({clearStories, selectType}) => {
     let params: any = useParams();

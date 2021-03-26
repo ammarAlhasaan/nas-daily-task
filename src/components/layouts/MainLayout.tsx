@@ -1,17 +1,20 @@
-import React, {FunctionComponent, useState} from 'react';
-import {Router, Link, Switch, Route, useParams, Redirect} from "react-router-dom";
+import React, {FunctionComponent} from 'react';
+import {Router, Link, Switch, Route, Redirect} from "react-router-dom";
 import {history} from "../../helpers/history";
 import logo from './../../assets/images/logo.svg';
 import logoBlack from './../../assets/images/logo-black.svg';
 import StoriesList from "../../pages/stories/StoriesList";
-import StoryTypeGroupButtons from "../buttons/StoryTypeGroupButtons";
 import StoryItem from "../../pages/stories/StoryItem";
 
 type MainLayoutProps = {
     id?: string,
 }
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
-
+    /*
+    * render main nav with nested routs
+    * new to get the new stories
+    * top get the Top stories
+    * */
     return (
         <Router history={history}>
             <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
@@ -28,7 +31,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
                     </div>
                 </nav>
             </div>
-            <div className="uk-container uk-container-small">
+            <div className="uk-container uk-container-small MainContainer">
                 <Routes/>
             </div>
             <footer>
@@ -41,10 +44,14 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
 }
 
 function Routes() {
+    /**
+     * defend main routes
+     * make new default route
+     * */
     return (
         <div>
             <Switch>
-                <Route path="/:type/:id" children={<StoryItem />}/>
+                <Route path="/:type/:id" children={<StoryItem/>}/>
                 <Route path="/:type" children={<StoriesList/>}/>
                 <Redirect exact from="/" to="/new"/>
 
