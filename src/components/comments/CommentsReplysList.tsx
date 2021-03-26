@@ -1,47 +1,27 @@
 import React, {FunctionComponent} from 'react';
-import CommentHeader from "./CommentHeader";
-import CommentBody from "./CommentBody";
 import CommentReply from "./CommentReply";
+import {connect} from "react-redux";
+import {getComment} from "../../redux/Comments/comments.actions";
 
 type CommentsRepliesListProps = {
-    id?: string,
+    getComment?: any,
+    commentsIds?: any,
 }
 
-const CommentsRepliesList: FunctionComponent<CommentsRepliesListProps> = ({id, children}) => {
+const CommentsRepliesList: FunctionComponent<CommentsRepliesListProps> = ({commentsIds}) => {
+
+    const commentsRepliesList = commentsIds.map((commentsItem: any, index: any) => {
+        return <CommentReply key={commentsItem} id={commentsItem}/>
+    })
 
     return (
         <ul className="uk-comment-list">
-            <CommentReply/>
-            <li>
-                <article className="uk-comment uk-visible-toggle">
-                    <CommentHeader by={""} time={""}/>
-                    <CommentBody text={""}/>
-                </article>
-                <ul>
-                    <li>
-                        <article className="uk-comment  uk-comment-primary  uk-visible-toggle">
-                            <CommentHeader by={"Author"} time={"12 days ago"}/>
-                            <CommentBody
-                                text={"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod\n" +
-                                "                                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero\n" +
-                                "                                    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea\n" +
-                                "                                    takimata sanctus est Lorem ipsum dolor sit amet."}/>
-                        </article>
-                    </li>
-                    <li>
-                        <article className="uk-comment uk-visible-toggle">
-                            <CommentHeader by={"Author"} time={"12 days ago"}/>
-                            <CommentBody
-                                text={"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod\n" +
-                                "                                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero\n" +
-                                "                                    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea\n" +
-                                "                                    takimata sanctus est Lorem ipsum dolor sit amet."}/>
-                        </article>
-                    </li>
-                </ul>
-            </li>
+            {commentsRepliesList}
         </ul>
     )
 }
 
-export default CommentsRepliesList;
+const mapStateToProps = (state: any) => {
+    return {...state.stories, ...state.comments}
+}
+export default connect(mapStateToProps, {getComment})(CommentsRepliesList)

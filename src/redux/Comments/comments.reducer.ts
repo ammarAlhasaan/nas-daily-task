@@ -24,6 +24,8 @@ const reducer = (state = INITIAL_STATE, action: any) => {
                 ...state, commentsIds: action.payload,
             };
         case GET_COMMENT:
+            if (action.payload.type !== 'comment')
+                return state
             return {
                 ...state, comments: [...state.comments, action.payload],
             };
@@ -37,7 +39,7 @@ const reducer = (state = INITIAL_STATE, action: any) => {
 
         case GET_REPLIES:
             return {
-                ...state, repliesIds:  [...state.repliesIds, ...action.payload],
+                ...state, repliesIds: [...state.repliesIds, ...action.payload],
             };
         case GET_REPLY:
             return {
