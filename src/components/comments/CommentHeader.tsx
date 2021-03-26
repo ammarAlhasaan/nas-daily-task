@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useState} from 'react';
 
 type CommentHeaderProps = {
     id?: string,
@@ -9,12 +9,12 @@ type CommentHeaderProps = {
 }
 
 const CommentHeader: FunctionComponent<CommentHeaderProps> = ({showReplies, repliesLength, by, time, children}) => {
-
+    const [show, setShow] = useState(false)
     return (
         <header className="uk-comment-header uk-position-relative">
             <div className="uk-grid-medium uk-flex-middle" uk-grid="true">
                 <div className="uk-width-auto">
-                    <img className="uk-comment-avatar" src="https://via.placeholder.com/80" width="80" height="80"
+                    <img className="uk-comment-avatar" src="https://via.placeholder.com/50" width="50" height="50"
                          alt=""/>
                 </div>
                 <div className="uk-width-expand">
@@ -25,7 +25,10 @@ const CommentHeader: FunctionComponent<CommentHeaderProps> = ({showReplies, repl
                 </div>
             </div>
             {repliesLength > 0 && <div className="uk-position-top-right uk-position-small uk-hidden-hover">
-              <a className="uk-link-muted" onClick={() => showReplies(true)}>Show {repliesLength} Replies</a>
+              <a className="uk-link-muted" onClick={() => {
+                  showReplies(!show)
+                  setShow(!show)
+              }}>{show ? "Hide " : "Show "} {repliesLength} Replies</a>
             </div>
             }
         </header>

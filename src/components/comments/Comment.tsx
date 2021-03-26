@@ -16,13 +16,21 @@ type CommentProps = {
 
 const Comment: FunctionComponent<CommentProps> = ({id, getComment, comments, index}) => {
     const [showReplies, setShowReplies] = useState(false)
-    useEffect(() => {
-        getComment(id)
-    }, [id])
 
+    const findComment = (id: any) => {
+        return comments?.length > 0 ? comments.find((comment: any) => {
+            return (comment?.id) ? comment.id == id : null
+        }) : null
+    }
+
+    useEffect(() => {
+        if (!findComment(id))
+            getComment(id)
+    }, [id])
     const comment: any = comments?.length > 0 ? comments.find((comment: any) => {
         return (comment?.id) ? comment.id == id : null
     }) : null
+
 
     if (!comment) {
         return <StoryCardLoader/>
