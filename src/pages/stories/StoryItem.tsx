@@ -43,7 +43,7 @@ const StoryItem: FunctionComponent<StoryItemProps> = ({selectedStory, comments, 
             <div uk-grid="true" style={{margin: 0}}>
                 <StoryCard id={id} storyDetails={true}/>
             </div>
-            {selectedStory?.kids?.length > 0 && <h3>Comments</h3>}
+            {selectedStory?.kids?.length > 0 ? <h3>Comments</h3> : <p>No Comments Available</p>}
             <CommentsList kids={currentCommentsIds}/>
             {currentCommentsIds?.length < selectedStory?.kids?.length && <div className="LoadMoreContainer">
               <PrimaryButton title="Load More" onClick={() => {
