@@ -5,14 +5,13 @@ import logo from './../../assets/images/logo.svg';
 import logoBlack from './../../assets/images/logo-black.svg';
 import StoriesList from "../../pages/stories/StoriesList";
 import StoryTypeGroupButtons from "../buttons/StoryTypeGroupButtons";
-import StoriesItem from "../../pages/stories/StoryItem";
 import StoryItem from "../../pages/stories/StoryItem";
 
 type MainLayoutProps = {
     id?: string,
 }
-const MainLayout: FunctionComponent<MainLayoutProps> = ({id, children}) => {
-    const [type, setType] = useState('new')
+const MainLayout: FunctionComponent<MainLayoutProps> = () => {
+
     return (
         <Router history={history}>
             <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
@@ -20,7 +19,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({id, children}) => {
                     <div className="uk-navbar-center">
                         <ul className="uk-navbar-nav">
                             <li>
-                                <Link to={"/home"} className="nav-link">
+                                <Link to={"/"} className="nav-link">
                                     <img src={logo}/>
                                 </Link>
                             </li>
@@ -30,7 +29,6 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({id, children}) => {
                 </nav>
             </div>
             <div className="uk-container uk-container-small">
-                <StoryTypeGroupButtons/>
                 <Routes/>
             </div>
             <footer>
