@@ -18,10 +18,13 @@ const CommentHeader: FunctionComponent<CommentHeaderProps> = ({showReplies, repl
                          alt=""/>
                 </div>
                 <div className="uk-width-expand">
-                    <h4 className="uk-comment-title uk-margin-remove">
-                        <a className="uk-link-reset" href="#">{by}</a></h4>
+                    <h5 className="Title">{by}</h5>
                     <p className="uk-comment-meta uk-margin-remove-top">
-                        <a className="uk-link-reset" href="#">{time}</a></p>
+                        <span className="Details uk-flex uk-flex-middle">
+                            <span className="ClockIcon" uk-icon="icon: clock; ratio: .5"></span>
+                            {time}
+                        </span>
+                    </p>
                 </div>
             </div>
             {repliesLength > 0 && <div className="uk-position-top-right uk-position-small uk-hidden-hover">
