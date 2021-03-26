@@ -2,7 +2,7 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
 import StoryCard from "../../components/cards/StoryCard";
-import {getComments, loadMore} from "../../redux/Comments/comments.actions";
+import {getComments} from "../../redux/Comments/comments.actions";
 import CommentsList from "../../components/comments/CommentsList";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 
@@ -54,4 +54,4 @@ const StoryItem: FunctionComponent<StoryItemProps> = ({selectedStory, comments, 
 const mapStateToProps = (state: any) => {
     return {...state.stories, ...state.comments}
 }
-export default connect(mapStateToProps, {getComments, loadMore})(StoryItem)
+export default connect(mapStateToProps, {getComments})(StoryItem)
