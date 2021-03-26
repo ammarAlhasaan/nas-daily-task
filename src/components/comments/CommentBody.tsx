@@ -9,7 +9,7 @@ const CommentBody: FunctionComponent<CommentBodyProps> = ({id, text, children}) 
 
     return (
         <div className="uk-comment-body">
-            <p>{text}</p>
+            <p dangerouslySetInnerHTML={{__html: text}}></p>
         </div>
     )
 }

@@ -3,10 +3,12 @@ import React, {FunctionComponent} from 'react';
 type CommentHeaderProps = {
     id?: string,
     by: string,
-    time: string
+    time: string,
+    showReplies: any,
+    repliesLength: number
 }
 
-const CommentHeader: FunctionComponent<CommentHeaderProps> = ({id, by, time, children}) => {
+const CommentHeader: FunctionComponent<CommentHeaderProps> = ({showReplies, repliesLength, by, time, children}) => {
 
     return (
         <header className="uk-comment-header uk-position-relative">
@@ -22,8 +24,10 @@ const CommentHeader: FunctionComponent<CommentHeaderProps> = ({id, by, time, chi
                         <a className="uk-link-reset" href="#">{time}</a></p>
                 </div>
             </div>
-            <div className="uk-position-top-right uk-position-small uk-hidden-hover"><a
-                className="uk-link-muted" href="#">Reply</a></div>
+            {repliesLength > 0 && <div className="uk-position-top-right uk-position-small uk-hidden-hover">
+              <a className="uk-link-muted" onClick={() => showReplies(true)}>Show {repliesLength} Replies</a>
+            </div>
+            }
         </header>
     )
 }
