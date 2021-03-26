@@ -4,7 +4,7 @@ import {getComment, getComments} from "../../redux/Comments/comments.actions";
 import Comment from "./Comment";
 
 type CommentsListProps = {
-    kids: [],
+    kids: any,
     getComment?: any,
     commentsIds?: any,
     getComments?: any,
