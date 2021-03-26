@@ -11,7 +11,6 @@ import hackerNewsApi from "../../apis/hacker-news.api";
 
 
 export const selectType = (type: string) => {
-    // console.log(selectType)
     return {type: SELECT_TYPE, payload: type};
 }
 export const selectStory = (story: any) => {

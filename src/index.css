@@ -107,6 +107,10 @@ button {
     padding-left: 15px;
 }
 
+.BaseCard .uk-comment-body p {
+    margin: 0;
+}
+
 .uk-comment-body > :last-child, .uk-comment-header > :last-child {
     font-size: 12px !important;
 }

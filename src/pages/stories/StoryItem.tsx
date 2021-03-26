@@ -30,18 +30,20 @@ const StoryItem: FunctionComponent<StoryItemProps> = ({selectedStory, comments, 
     }
 
     useEffect(() => {
-        if (selectedStory.kids) {
+        if (selectedStory?.kids) {
             loadMoreComments(selectedStory.kids)
         }
     }, [selectedStory])
     return (
         <div>
+            <h3 style={{marginTop: '20'}}>Details</h3>
+
             <div uk-grid="true" style={{margin: 0}}>
                 <StoryCard id={id} storyDetails={true}/>
             </div>
-
+            <h3>Comments</h3>
             <CommentsList kids={currentCommentsIds}/>
-            {currentCommentsIds.length < selectedStory.kids.length && <div className="LoadMoreContainer">
+            {currentCommentsIds?.length < selectedStory?.kids?.length && <div className="LoadMoreContainer">
               <PrimaryButton title="Load More" onClick={() => {
                   loadMoreComments(selectedStory.kids)
               }}/>
